@@ -4,6 +4,7 @@
 #include "shape.h"
 #include "rectangle.h"
 #include "rhombus.h"
+#include "right_triangle.h"
 
 using namespace std;
 
@@ -19,11 +20,13 @@ int main()
     // 1. Creazione figure
     shapes[nshapes++] = new rectangle(0, 0, 10, 5);
     shapes[nshapes++] = new rhombus(2, 2, 10, 6);
+    shapes[nshapes++] = new right_triangle(2, 2, 6, 7);
 
 
     // 2. Impostazione testo
     shapes[0]->SetText("rettangolo");
     shapes[1]->SetText("rombo");
+    shapes[1]->SetText("triangolo rettangolo");
 
 
     // 3. Dump polimorfico
@@ -33,8 +36,29 @@ int main()
         cout << endl << "Figura [" << i << "]" << endl;
         shapes[i]->Dump();
     }
+   
+    float scale;
+    cout << "inserisci scalamento" << endl;
+    cin >> scale;
+    
+
+    for (int i = 0; i < nshapes; i++) {
+        shapes[i]->Scale(scale);
+    }
 
     
+
+    for (int i = 0; i < nshapes; i++) {
+        cout << endl << "Figura [" << i << "]" << endl;
+        shapes[i]->Dump();
+    }
+    
+
+    // 4. distruttori 
+    for(int i = 0; i < nshapes; i++) {
+        delete shapes[i];
+    }
+   
 
     cout << endl << "===== FINE TEST =====" << endl;
 

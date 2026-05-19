@@ -86,7 +86,7 @@ void right_triangle::Reset(){
 /// @brief to get the height of the right_triangle
 /// @return height
 float right_triangle::GetHeight(){
-	return ;
+	return height;
 }
 
 

@@ -34,7 +34,7 @@ public:
     shape(float px, float py, float w, float h);
     shape(const shape &r);
 
-    ~shape();
+    virtual ~shape();
     /// @}
 
 
@@ -52,7 +52,7 @@ public:
     void Reset();
     /// @}
 	
-	/// @name FOMATTING
+	/// @name FORMATTING
     /// @{
 	void Scale(float sf);
 	/// @}
@@ -78,7 +78,10 @@ public:
     float GetBoundingBoxArea();
 
     void GetText(char* string);
+
 	
+    
+
 	virtual float GetPerimeter()=0;
 	virtual float GetArea()=0;
 

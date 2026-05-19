@@ -180,9 +180,16 @@ void shape::Reset()
 /// @brief to rescale the shape without changing the aspect ratio
 /// @param sf scale factor (1.0 = 100%, no changes)
    
-void shape::Scale(float sf) 
+void shape::Scale(float sf)
 {
-	// TO DO
+    if (sf < 0){
+        printf("Parameter cannot be negative");
+        return;
+    }
+
+    height = height * sf;
+    width = width * sf;
+
 }
 
 /* ----------------------------
@@ -261,6 +268,8 @@ void shape::SetText(const char* string)
 
     SafeStrCopy(text, string, TEXTSIZE);
 }
+
+
 
 /// @brief get position of the object
 /// @param px (reference to) position on x
@@ -349,7 +358,7 @@ void shape::WarningMessage(const char *string)
 /// @brief for debugging: all infos about the object
 void shape::Dump()
 {
-    std::cout << "shape Dump:" << std::endl;
+    std::cout << "shape :" << std::endl;
     std::cout << "  Position: (" << x << ", " << y << ")" << std::endl;
     std::cout << "  Width:  " << width << std::endl;
     std::cout << "  Height: " << height << std::endl;

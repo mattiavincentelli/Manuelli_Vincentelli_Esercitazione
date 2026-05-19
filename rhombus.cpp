@@ -142,7 +142,7 @@ void rhombus::Dump()
 	
 	shape::Dump();
 	
-    
+    cout << "  Figure Side:         " << GetSide() << endl;
     cout << "  Figure area:         " << GetArea() << endl;
     cout << "  Figure perimeter:    " << GetPerimeter() << endl;
     cout << "  Text:                " << (text ? text : "(null)") << endl;
