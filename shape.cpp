@@ -43,7 +43,11 @@ shape::shape()
 shape::shape(float px, float py, float w, float h)
 {
 	cout << "shape - constructor" << endl;
-	
+	/*if(px + w > 100 || py + h > 100 || px < 0 || py < 0){
+         cout << "Poligono fuori griglia" << endl;
+         exit(1);
+    }*/
+       
 	text = nullptr;
     Init();
 	
@@ -186,10 +190,18 @@ void shape::Scale(float sf)
         printf("Parameter cannot be negative");
         return;
     }
-
+    float temp_h = height;
+    float temp_w = width;
+    
     height = height * sf;
     width = width * sf;
-
+   
+    /*if(x + width > 100 || y + height > 100){
+         cout << "Poligono fuori griglia" << endl;
+         height = temp_h;
+         width = temp_w;
+    }*/
+       
 }
 
 /* ----------------------------
