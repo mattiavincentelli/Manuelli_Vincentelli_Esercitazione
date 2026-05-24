@@ -1,3 +1,7 @@
+/*! \file es_2_main_draft.cpp
+    \brief main to simulate a grid in which you can create , modify , and delete Polygons of the type : Rectangle, Rhombus and Right Triangle
+	\author Manuelli Vincentelli
+*/
 #include <iostream>
 #include <cmath>
 #include <string>   
@@ -10,13 +14,41 @@
 
 using namespace std;
 
-#define MAX_shapeS 10
-
+#define MAX_shapeS 100
+/// @brief function to print all the Polygons created at run time
+/// @param shape 
+/// @param n 
 void Print_All_Pol(shape *shape[], int n);
+
+
+/// @brief function to modify height and width of a Polygon as well as its text
+/// @param shape 
+/// @param grid 
+/// @param n 
 void Modify_Pol(shape *shape[], grid *grid, int n);
+
+
+/// @brief function to change the x and y of a Polygon
+/// @param shape 
+/// @param grid 
+/// @param n 
 void Change_Pos(shape *shape[], grid *grid, int n);
+
+
+/// @brief function to insert a new Polygon 
+/// @param shape 
+/// @param n 
+/// @param grid 
 void Insert_New_Pol(shape *shape[], int *n, grid *grid);
+
+/// @brief function to delete a singular shape
+/// @param shape 
+/// @param n 
 void Delete_Pol(shape *shape[], int &n);
+
+/// @brief function to delete all Polygons
+/// @param shape 
+/// @param n 
 void Delete_All_Pols(shape *shape[], int n);
 
 int main()
