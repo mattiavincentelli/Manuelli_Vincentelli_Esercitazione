@@ -16,7 +16,7 @@ void Print_All_Pol(shape *shape[], int n);
 void Modify_Pol(shape *shape[], grid *grid, int n);
 void Change_Pos(shape *shape[], grid *grid, int n);
 void Insert_New_Pol(shape *shape[], int *n, grid *grid);
-void Delete_Pol(shape *shape[], int n);
+void Delete_Pol(shape *shape[], int &n);
 void Delete_All_Pols(shape *shape[], int n);
 
 int main()
@@ -80,9 +80,11 @@ int main()
 
 
 void Print_All_Pol(shape *shape[], int n) {
-    if(!shape) 
-        cout << "Nessuno poligono ancora creato" << endl;
-        
+     if(n == 0) {
+        cout << "Ancora nessun poligono creato" << endl;
+        return;
+    }
+
     for (int i = 0; i < n; i++) {
         cout << endl << "Figura [" << i << "]" << endl;
         shape[i]->Dump();
@@ -95,16 +97,16 @@ void Modify_Pol(shape *shape[], grid *grid, int n) {
     int n_Pol;
 
     for(int i = 0; i < n; i++) {
-        cout << "poligoni che puoi modificare" << i << endl;
+        cout << "poligoni che puoi modificare" << endl << i << endl;
         shape[i]->Dump();
     }
 
-    cout << "quale poligono vuoi modificare?";
+    cout << "quale poligono vuoi modificare?" << endl;
     cin >> n_Pol;
 
     if(n_Pol < 0 || n_Pol > n - 1) {
         cout << "Poligono non valido" << endl;
-        exit(0);
+        return;
     }
   
 
@@ -123,7 +125,7 @@ void Modify_Pol(shape *shape[], grid *grid, int n) {
 
 
     if(shape[n_Pol]->GetWidth() + new_w > grid->GetWidth() || shape[n_Pol]->GetHeight() + new_h > grid->GetHeight())
-        cout << "poligono fuori dalla griglia" ; 
+        cout << "poligono fuori dalla griglia" << endl; 
     else{
         shape[n_Pol]->SetWidth(new_w);
         shape[n_Pol]->SetHeight(new_h);
@@ -138,17 +140,17 @@ void Change_Pos(shape *shape[], grid *grid, int n) {
     int n_Pol;
 
     for(int i = 0; i < n; i++) {
-        cout << "poligoni di cui puoi cambiare la posizione" << i << endl;
+        cout << "poligoni di cui puoi cambiare la posizione" << endl << i << endl;
         shape[i]->Dump();
     }
 
 
-    cout << "quale poligono vuoi modificare?";
+    cout << "quale poligono vuoi modificare?" << endl;
     cin >> n_Pol;
 
       if(n_Pol < 0 || n_Pol > n - 1 ) {
         cout << "Poligono non valido" << endl;
-        exit(0);
+        return;
     }
 
     cout << "Come vuoi modificare la x?" << endl; 
@@ -160,7 +162,7 @@ void Change_Pos(shape *shape[], grid *grid, int n) {
 
 
     if(shape[n_Pol]->GetWidth() + new_x > grid->GetWidth() || shape[n_Pol]->GetHeight() + new_y > grid->GetHeight())
-        cout << "poligono fuori dalla griglia" ; 
+        cout << "poligono fuori dalla griglia" << endl; 
     else{
         shape[n_Pol]->SetPosition(new_x, new_y);
     }
@@ -205,35 +207,52 @@ void Insert_New_Pol(shape *shape[], int *n, grid *grid) {
             default:
                 break;
         }
+        (*n)++;
     }
          
-    (*n)++;
+    
 }
 
 
-void Delete_Pol(shape *shape[], int n) {
+void Delete_Pol(shape *shape[], int &n) {
     int choice;
+    if(n == 0) {
+        cout << "Nessun poligono ancora creato" << endl;
+        return;
+    }
+        
 
+    cout << "poligoni che puoi cancellare" << endl;
      for(int i = 0; i < n; i++) {
-        cout << "poligoni che puoi cancellare" << i << endl;
+        cout << i << ")" << endl;
         shape[i]->Dump();
     }
 
     cout << "Quale poligono vuoi cancellare?" << endl; 
     cin >> choice;
 
-    if(choice < 0 || choice >= n)
+    if(choice < 0 || choice >= n) {
         cout << "Scelta non valida" << endl; 
+        return;
+    }
+        
     
     delete shape[choice];
+    
 
     for(int i = choice; i < n - 1; i++)
         shape[i] = shape[i + 1];
 
     shape[n - 1] = nullptr;
+    n--;
 }
 
 void Delete_All_Pols(shape *shape[], int n) {
+    if(n == 0) {
+        cout << "Nessun poligono ancora creato" << endl;
+        return;
+    }
+    
     for(int i =0; i < n; i++)
         delete shape[i];
 }
